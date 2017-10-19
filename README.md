@@ -8,4 +8,13 @@ This version if a fork of the project of the same name by @dokeeffe.
 
 ![project box](http://www.raguenaud-online.org/cedric/photos/astro/focuser/focuser.png)
 
+Related projects:
+
+[HomeMade.Focuser](https://github.com/cedric-r/HomeMade.Focuser)
+
+[ipfocuser](https://github.com/cedric-r/ipfocuser)
+
+[ip-focuser](https://github.com/cedric-r/ip-focuser)
+
+[ASCOM.HomeMade.Focuser](https://github.com/cedric-r/ASCOM.HomeMade.Focuser)
 
