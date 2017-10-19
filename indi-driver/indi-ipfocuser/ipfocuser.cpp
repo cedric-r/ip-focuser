@@ -88,19 +88,19 @@ bool IpFocus::initProperties()
 {
     INDI::Focuser::initProperties();
 
-    tcpConnection->setDefaultHost("192.168.1.203");
+    tcpConnection->setDefaultHost("192.168.0.118");
     tcpConnection->setDefaultPort(80);
 
     IUFillText(&AlwaysApproachDirection[0], "ALWAYS_APPROACH_DIR", "Always approach CW/CCW/blank", "CCW");
     IUFillTextVector(&AlwaysApproachDirectionP, AlwaysApproachDirection, 1, getDeviceName(), "BACKLASH_APPROACH_SETTINGS", "Backlash Direction", OPTIONS_TAB, IP_RW, 60, IPS_IDLE);
 
-    IUFillText(&BacklashSteps[0],"BACKLASH_STEPS","Backlash steps","300");
+    IUFillText(&BacklashSteps[0],"BACKLASH_STEPS","Backlash steps","0");
     IUFillTextVector(&BacklashStepsP,BacklashSteps,1,getDeviceName(),"BACKLASH_STEPS_SETTINGS","Backlash Steps",OPTIONS_TAB,IP_RW,60,IPS_IDLE);
 
     /* props to reboot the focuser device if connection faile. This is easier than debugging strange arduino network issues  */
-    IUFillText(&PowerOffEndpointT[0], "POWEROFF_ENDPOINT", "Power Off URL", "http://192.168.2.225:8080/power/focuser/off");
+    IUFillText(&PowerOffEndpointT[0], "POWEROFF_ENDPOINT", "Power Off URL", "http://192.168.0.118/power/focuser/off");
     IUFillTextVector(&PowerOffEndpointP, PowerOffEndpointT, 1, getDeviceName(), "POWEROFF_ENDPOINT", "Power Off", OPTIONS_TAB, IP_RW, 5, IPS_IDLE);
-    IUFillText(&PowerOnEndpointT[0], "POWERON_ENDPOINT", "Power On URL", "http://192.168.2.225:8080/power/focuser/on");
+    IUFillText(&PowerOnEndpointT[0], "POWERON_ENDPOINT", "Power On URL", "http://192.168.0.118/power/focuser/on");
     IUFillTextVector(&PowerOnEndpointP, PowerOnEndpointT, 1, getDeviceName(), "POWERON_ENDPOINT", "Power On", OPTIONS_TAB, IP_RW, 5, IPS_IDLE);
 
     /* Relative and absolute movement settings which are not set on connect*/
@@ -144,7 +144,7 @@ bool IpFocus::Connect() {
 bool IpFocus::Handshake()
 {
     DEBUG(INDI::Logger::DBG_SESSION, "***** connecting ******");
-    APIEndPoint = std::string("http://") + std::string(tcpConnection->host()) + std::string(":80") + std::string("/focuser"); //FIXME: for some reason std::to_string(tcpConnection->getPortFD()) returns 127. So hard code 80 for now.
+    APIEndPoint = std::string("http://") + std::string(tcpConnection->host()) + std::string(":80") + std::string("/ipfocuser.php"); //FIXME: for some reason std::to_string(tcpConnection->getPortFD()) returns 127. So hard code 80 for now.
     DEBUGF(INDI::Logger::DBG_SESSION, "API endpoint %s", APIEndPoint.c_str());
     CURL *curl;
     CURLcode res;
