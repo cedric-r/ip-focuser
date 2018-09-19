@@ -81,7 +81,7 @@ IpFocus::~IpFocus()
 
 const char * IpFocus::getDefaultName()
 {
-    return (char *)"IP Focuser";
+    return (char *)"HomeMadeIP Focuser";
 }
 
 bool IpFocus::initProperties()
